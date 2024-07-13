@@ -1,0 +1,86 @@
+{% extends '_layout/base.html' %}
+
+{% block title %}Dashboard - Unforaimcode{% endblock %}
+
+{% block content %}
+<link href="{{url_for('static',filename='modules/page-speed/pagespeed.min.css')}}" rel="stylesheet" defer>
+<script src="{{url_for('static',filename='modules/chart/dist/chart.umd.js')}}"></script>
+<div class="flex justify-center">
+  <main class="content flex justify-center no-scrollbar w-full scroll-smooth transition-all duration-300 lg:min-h-screen">
+    <div class="container p-4 md:p-8 font-sora">
+      <div class="mb-10 mt-2" data-aos="fade-up" data-aos-duration="800">
+        <h1 class="font-sora text-2xl font-medium text-neutral-800 dark:text-neutral-300">Dashboard</h1>
+        <p class="mb-6 border-b border-dashed border-neutral-600 pb-6 pt-2 text-neutral-600 dark:text-neutral-400">This is my personal dashboard, built with Flask Python API routes deployed as serverless functions.</p>
+        <section class="flex flex-col">
+          <section>
+            {% include 'dashboard-page/pageSpeed.html' %}
+          </section>
+          <div class="border-t border-neutral-200 my-4 mt-0 mb-7 dark:border-neutral-700" data-testid="breakline"></div>
+          <section class="flex flex-col gap-y-2">
+            {% include 'dashboard-page/githubContributions.html' %}
+          </section>
+        </section>
+      </div>
+    </div>
+  </main>
+</div>
+<script>
+  function handleRouteChange(href) {
+    activeRoute = href;
+    const buttons = document.querySelectorAll('.nav-button');
+    buttons.forEach(button => {
+      button.classList.remove(
+        'rounded-lg', 'px-2', 'py-1', 'text-xs',
+        'bg-neutral-700', 'text-white', 'dark:bg-neutral-200', 'dark:text-black',
+        'bg-neutral-100', 'dark:bg-neutral-800', 'text-black', 'active', 'dark:text-neutral-100'
+      );
+
+      if (button.getAttribute('data-href') === href) {
+        button.classList.add(
+          'rounded-lg', 'px-2', 'py-1', 'text-xs',
+          'bg-neutral-700', 'text-white', 'dark:bg-neutral-200', 'dark:text-black', 'active'
+        );
+      } else {
+        button.classList.add(
+          'rounded-lg', 'px-2', 'py-1', 'text-xs',
+          'bg-neutral-100', 'dark:bg-neutral-800', 'dark:text-neutral-100'
+        );
+      }
+    });
+  }
+</script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const tabs = document.querySelectorAll(".nav-button");
+    const loadingContainer = document.getElementById("loading-container");
+    const resPagespeed = document.getElementById("resPagespeed");
+
+    function showLoading() {
+      loadingContainer.style.display = "flex";
+      resPagespeed.style.display = "none";
+    }
+
+    function hideLoading() {
+      setTimeout(function () {
+        loadingContainer.style.display = "none";
+        resPagespeed.style.display = "block";
+      }, 5000);
+    }
+    showLoading();
+    setTimeout(function () {
+      hideLoading();
+    }, 5000);
+
+    tabs.forEach(function (tab) {
+      tab.addEventListener("click", function () {
+        showLoading();
+
+        setTimeout(function () {
+          hideLoading();
+        }, 5000);
+      });
+    });
+  });
+</script>
+<script src="{{ url_for('static', filename='modules/flowbite/flowbite.bundle.js') }}" defer></script>
+{% endblock %}

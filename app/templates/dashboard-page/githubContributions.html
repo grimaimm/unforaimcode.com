@@ -1,0 +1,103 @@
+<div class="flex items-center gap-1 text-xl font-medium text-neutral-800 dark:text-neutral-300 ">
+  <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16" class="mr-1" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+    <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+  </svg>
+  <h2 class="capitalize">Contributions</h2>
+</div>
+<div class="flex flex-col justify-between gap-2 text-neutral-600 dark:text-neutral-400 md:flex-row lg:items-center">
+  <p class="dark:text-neutral-400">My contributions from last year on github.</p>
+  <a target="_blank" class="font-code text-sm text-neutral-600 hover:text-neutral-700 dark:text-neutral-400 hover:dark:text-neutral-400" href="https://github.com/grimaimm">@grimaimm</a>
+</div>
+<div class="space-y-3">
+  <div class="grid grid-cols-2 gap-3 py-2 sm:grid-cols-4">
+    <div class="flex flex-col self-center rounded-xl border border-neutral-200 bg-neutral-100 px-4 py-3 dark:border-neutral-800 dark:bg-neutral-800">
+      <span class="text-sm dark:text-neutral-400">Total</span>
+      <div>
+        <span class="text-xl font-medium text-green-700 dark:text-green-400 lg:text-2xl" data-testid="counter">{{ contributions_last_year }}</span>
+      </div>
+    </div>
+    <div class="flex flex-col self-center rounded-xl border border-neutral-200 bg-neutral-100 px-4 py-3 dark:border-neutral-800 dark:bg-neutral-800">
+      <span class="text-sm dark:text-neutral-400">Repositories</span>
+      <div>
+        <span class="text-xl font-medium text-green-700 dark:text-green-400 lg:text-2xl" data-testid="counter">{{ contributions['total_repositories'] }}</span>
+      </div>
+    </div>
+    <div class="flex flex-col self-center rounded-xl border border-neutral-200 bg-neutral-100 px-4 py-3 dark:border-neutral-800 dark:bg-neutral-800">
+      <span class="text-sm dark:text-neutral-400">Best Day</span>
+      <div>
+        <span class="text-xl font-medium text-green-700 dark:text-green-400 lg:text-2xl" data-testid="counter">{{ contributions['best_day'] }}</span>
+      </div>
+    </div>
+    <div class="flex flex-col self-center rounded-xl border border-neutral-200 bg-neutral-100 px-4 py-3 dark:border-neutral-800 dark:bg-neutral-800">
+      <span class="text-sm dark:text-neutral-400">Average</span>
+      <div>
+        <span class="text-xl font-medium text-green-700 dark:text-green-400 lg:text-2xl" data-testid="counter">{{ contributions['average_per_day'] }}</span>
+        <span class="text-sm dark:text-neutral-400"> / day</span>
+      </div>
+    </div>
+  </div>
+  <div class="relative flex flex-col">
+    <div class="rounded-xl border border-neutral-200 bg-neutral-100 px-4 py-3 dark:border-neutral-800 dark:bg-neutral-800">
+      <canvas id="userActivityChart"></canvas>
+      <script>
+        function getCurrentTheme() {
+          return document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+        }
+
+        // Fungsi untuk mendapatkan warna latar belakang yang sesuai dengan tema
+        function getBackgroundColor(theme) {
+          return theme === 'dark' ? 'rgba(74, 222, 128, 0.2)' : 'rgba(21, 128, 61, 0.2)';
+        }
+
+        // Fungsi untuk mendapatkan warna batas yang sesuai dengan tema
+        function getBorderColor(theme) {
+          return theme === 'dark' ? 'rgba(74, 222, 128, 1)' : 'rgba(21, 128, 61, 1)';
+        }
+
+        // Data kontribusi (sesuaikan dengan data yang Anda terima dari Flask)
+        var contributionsData = {
+          labels: {{ weekly_contributions.keys() | list | tojson | safe }},
+          datasets: [{
+              label: 'Contributions',
+              data: {{ weekly_contributions.values() | list | tojson | safe }},
+              backgroundColor: getBackgroundColor(getCurrentTheme()),
+              borderColor: getBorderColor(getCurrentTheme()),
+              borderWidth: 1
+          }]
+        };
+
+        // Mengubah nama bulan menjadi tiga karakter pertama
+        contributionsData.labels = contributionsData.labels.map(function(label) {
+          return label.split(" ")[0].substring(0, 3);
+        });
+
+        // Mengubah nama hari menjadi tiga karakter pertama
+        var dayLabels = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+        // Inisialisasi grafik
+        var ctx = document.getElementById('userActivityChart').getContext('2d');
+        var userActivityChart = new Chart(ctx, {
+          type: 'bar',
+          data: contributionsData,
+          options: {
+              scales: {
+                  x: {
+                      type: 'category',
+                      position: 'bottom',
+                      labels: contributionsData.labels,
+                  },
+                  y: {
+                      ticks: {
+                          callback: function(value, index, values) {
+                              // Menampilkan hanya hari
+                              return dayLabels[index];
+                          }
+                      }
+                  }
+              }
+          }
+        });
+      </script>
+    </div>
+  </div>
+</div>

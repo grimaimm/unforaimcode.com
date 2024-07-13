@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Web developer experienced in frontend technologies, including HTML, CSS, and JavaScript, with proficiency in backend development using Flask and Python.">
+    <meta name="keywords" content="unforaimcode pythonanywhere, unforaimcode python, unforaimcode, unforaim, unforaim python, Flask Python, blog, project web, web profile, personal website, web pribadi, portofolio, portfolio, HTML, CSS, JavaScript">
+    <meta name="author" content="MuhammadRahim @aiiimmmm._">
+    {% include '_includes/stylesheet.html' %}
+    <title>{% block title %}Unforaimcode{% endblock %}</title>
+    {% include '_includes/favicon.html' %}
+    <script>
+      // On page load or when changing themes, best to add inline in `head` to avoid FOUC
+      if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+          document.documentElement.classList.add('dark');
+      } else {
+          document.documentElement.classList.remove('dark')
+      }
+    </script>
+  </head>
+  <body class="font-sora dark:bg-dark transition-all duration-300">
+    <div class="wrapper flex lg:flex-row flex-col items-stretch lg:dark:bg-dark-wrapper lg:bg-dark-wrapper">
+      <div id="sidebar">
+        {% include '_includes/nav.html' %}
+      </div>
+      <div class="main">
+        {% block content %}{% endblock %}
+      </div>
+    </div>
+    {% include '_includes/scripts.html' %}
+  </body>
+</html>
+

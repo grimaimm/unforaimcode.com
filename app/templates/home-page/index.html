@@ -1,0 +1,208 @@
+{% extends '_layout/base.html' %}
+
+{% block title %}Home - Unforaimcode{% endblock %}
+
+{% block content %}
+<div class="flex justify-center">
+  <main class="content flex justify-center no-scrollbar w-full scroll-smooth transition-all duration-300 lg:min-h-screen">
+    <div class="container p-4 md:p-8">
+      <div class="mb-10 mt-2" data-aos="fade-up" data-aos-duration="800">
+        <section class="bg-cover font-sora" id="sectionOne">
+          <div class="space-y-3">
+            <div class="flex gap-2 text-2xl lg:text-3xl font-medium text-neutral-900 dark:text-neutral-200">
+              <h1 id="my-heading">Hi, <span id="typed"></span></h1>
+              <!-- <div class="ml-1 animate-waving-hand">👋</div> -->
+            </div>
+            <div class="space-y-4">
+              <ul class="flex flex-col lg:flex-row gap-1 lg:gap-10 ml-5 list-disc text-neutral-700 dark:text-neutral-400">
+                <li>Remote Worker</li>
+                <li>Based in Yogyakarta, Indonesia <span class="ml-1">🇮🇩</span></li>
+              </ul>
+            </div>
+          </div>
+          <p class="leading-[1.6] md:leading-loose mt-4 md:mt-6 text-neutral-800 dark:text-neutral-300">
+            Web developer experienced in frontend technologies, including HTML, CSS, and JavaScript, 
+            with proficiency in backend development using Flask and Python.
+            I thrive on collaborating with teams to deliver efficient, scalable, and visually appealing web applications.
+          </p>
+        </section>
+
+        <div class="border-t border-neutral-200 my-4 mt-8 mb-7 dark:border-neutral-700" data-testid="breakline"></div>
+
+        <section class="bg-cover font-sora" id="sectionTwo">
+          <div class="space-y-6">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-1.5 text-xl font-medium text-neutral-800 dark:text-neutral-300">
+                <svg class="mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" stroke="currentColor" fill="currentColor" stroke-width="0" height="20" width="20">
+                  <path d="M168 80c-13.3 0-24 10.7-24 24V408c0 8.4-1.4 16.5-4.1 24H440c13.3 0 24-10.7 24-24V104c0-13.3-10.7-24-24-24H168zM72 480c-39.8 0-72-32.2-72-72V112C0 98.7 10.7 88 24 88s24 10.7 24 24V408c0 13.3 10.7 24 24 24s24-10.7 24-24V104c0-39.8 32.2-72 72-72H440c39.8 0 72 32.2 72 72V408c0 39.8-32.2 72-72 72H72zM176 136c0-13.3 10.7-24 24-24h96c13.3 0 24 10.7 24 24v80c0 13.3-10.7 24-24 24H200c-13.3 0-24-10.7-24-24V136zm200-24h32c13.3 0 24 10.7 24 24s-10.7 24-24 24H376c-13.3 0-24-10.7-24-24s10.7-24 24-24zm0 80h32c13.3 0 24 10.7 24 24s-10.7 24-24 24H376c-13.3 0-24-10.7-24-24s10.7-24 24-24zM200 272H408c13.3 0 24 10.7 24 24s-10.7 24-24 24H200c-13.3 0-24-10.7-24-24s10.7-24 24-24zm0 80H408c13.3 0 24 10.7 24 24s-10.7 24-24 24H200c-13.3 0-24-10.7-24-24s10.7-24 24-24z"/>
+                </svg>
+                <h2 class="capitalize">Latest Articles</h2>
+              </div>
+              <div class="flex flex-col lg:flex-row justify-between lg:items-center gap-2">
+                <a href="/blog">
+                  <div class="flex gap-1 hover:gap-3 transition-all duration-300 cursor-pointer text-sm text-neutral-600 hover:text-neutral-700 dark:text-neutral-500 dark:hover:text-neutral-400 mt-1">
+                    <div class="flex">View All <span class="hidden sm:block ml-1">Articles</span></div>
+                    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16" height="22" width="22" xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z">
+                      </path>
+                    </svg>
+                  </div>
+                </a>
+              </div>
+            </div>
+            <div class="container-service-card mt-4 gap-4 pb-6 scrollbar-hide">
+              {% for blog in blogs %}
+              <a href="/blog/{{ blog['routes'] }}" class="relative animate-slide-card duration-500 hover:scale-95">
+                <div class="relative z-0 flex h-max min-w-[250px] flex-col items-start space-y-1 ">
+                  <div class="h-28 w-full overflow-hidden rounded-md">
+                    <img 
+                      alt="{{ blog['title'] }}" 
+                      fetchpriority="high" 
+                      width="500" 
+                      height="auto" 
+                      decoding="async" 
+                      data-nimg="1" 
+                      class="h-full w-full rounded-md object-cover" 
+                      style="color: transparent;" 
+                      srcset="{{ blog['image'] }}"
+                    />
+                  </div>
+                  <p class="text-sm text-neutral-800 dark:text-neutral-300 ellipsis">{{ blog['title'] }}</p>
+                  <div class="flex gap-4">
+                    <span class="text-[10px] text-neutral-600 dark:text-neutral-400">{{ blog['published'].strftime('%b %d, %Y') }}</span>
+                    
+                    <div class="flex text-[10px] items-center justify-center gap-1 text-neutral-600 dark:text-neutral-400">
+                    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 576 512" height="10" width="14" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M288 144a110.94 110.94 0 0 0-31.24 5 55.4 55.4 0 0 1 7.24 27 56 56 0 0 1-56 56 55.4 55.4 0 0 1-27-7.24A111.71 111.71 0 1 0 288 144zm284.52 97.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 0 0 0 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 0 0 0-29.19zM288 400c-98.65 0-189.09-55-237.93-144C98.91 167 189.34 112 288 112s189.09 55 237.93 144C477.1 345 386.66 400 288 400z"></path>
+                    </svg>
+                      <div class="flex gap-1">
+                        <span>{{ blog['views'] }}</span>
+                        <span>Views</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+              {% endfor %}
+            </div>
+          </div>
+        </section>
+
+        <div class="border-t border-neutral-200 my-4 mt-3 mb-7 dark:border-neutral-700" data-testid="breakline"></div>
+
+        <section class="bg-cover font-sora" id="sectionThree">
+          <div class="space-y-2">
+            <div class="flex items-center gap-1.5 text-xl font-medium text-neutral-800 dark:text-neutral-300">
+              <svg class="mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512" stroke="currentColor" fill="currentColor" stroke-width="0" height="20" width="20">
+                <path d="M88 216c81.7 10.2 273.7 102.3 304 232H0c99.5-8.1 184.5-137 88-232zm32-152c32.3 35.6 47.7 83.9 46.4 133.6C249.3 231.3 373.7 321.3 400 448h96C455.3 231.9 222.8 79.5 120 64z"/>
+              </svg>
+              <h2 class="capitalize">Services</h2>
+            </div>
+            <div class="flex flex-col justify-between gap-2 text-neutral-700 dark:text-neutral-400 md:flex-row lg:items-center">
+              <p class="desc">What can I do for you?</p>
+            </div>
+          </div>
+          <div class="container-service-card mt-4 gap-4 pb-6 scrollbar-hide">
+            {% for service in services %}
+            <div class="card-service">
+              <div class="block service-card-width p-6 space-y-4 bg-cover rounded-xl hover:bg-neutral-100 dark:bg-neutral-800">
+                <div class="mb-2 text-lg font-bold tracking-tight text-neutral-200 dark:text-neutral-300">{{ service['title'] }}</div>
+                  <p class="text-sm text-neutral-300 dark:text-neutral-400">{{ service['description'] }}</p>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </section>
+        
+        <div class="border-t border-neutral-200 my-4 mt-3 mb-7 dark:border-neutral-700" data-testid="breakline"></div>
+
+        <section class="bg-cover font-sora" id="sectionThree">
+          <div class="space-y-2">
+            <div class="flex items-center gap-1.5 text-xl font-medium text-neutral-800 dark:text-neutral-300">
+              <svg class="mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" stroke="currentColor" fill="currentColor" stroke-width="0" height="20" width="20">
+                <path d="M362.8 8l-9.4 30.6-128 416L216 485.2 277.2 504l9.4-30.6 128-416L424 26.8 362.8 8zm71.9 136l22.6 22.6L546.7 256l-89.4 89.4L434.7 368 480 413.3l22.6-22.6 112-112L637.3 256l-22.6-22.6-112-112L480 98.7 434.7 144zM160 98.7l-22.6 22.6-112 112L2.7 256l22.6 22.6 112 112L160 413.3 205.3 368l-22.6-22.6L93.3 256l89.4-89.4L205.3 144 160 98.7z"/>
+              </svg>
+              <h2 class="capitalize">Skills</h2>
+            </div>
+            <div class="flex flex-col justify-between gap-2 text-neutral-700 dark:text-neutral-400 md:flex-row lg:items-center">
+              <p class="desc">My coding skills</p>
+            </div>
+          </div>
+          <div class="flex w-full mt-4 text-base flex-col">
+            <div class="scroller text-neutral-700 dark:text-neutral-400" data-speed="fast">
+              <ul class="tag-list scroller__inner py-3 flex-row" id="lazy-load-list">
+
+              </ul>
+            </div>
+            <div class="scroller text-neutral-700 dark:text-neutral-400" data-direction="right" data-speed="slow">
+              <ul class="tag-list scroller__inner py-3 flex-row-reverse" id="lazy-load-list-reverse">
+
+              </ul>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+</div>
+<script src="{{ url_for('static', filename='modules/typed/typed.umd.js') }}"></script>
+<script async>
+  document.addEventListener('DOMContentLoaded', function() {
+      var typed = new Typed('#typed', {
+          strings: ["I'm Muhammad Rahim", "I'm Web Developer"],
+          typeSpeed: 100,    // Kecepatan pengetikan (ms per karakter)
+          backSpeed: 50,     // Kecepatan backspace (ms per karakter)
+          startDelay: 200,   // Jeda sebelum mulai mengetik (ms)
+          backDelay: 1200,   // Jeda setelah selesai mengetik sebelum backspace (ms)
+          loop: true,        // Ulang dari awal setelah selesai
+          showCursor: true,  // Tampilkan kursor mengetik
+          cursorChar: '|',   // Karakter kursor mengetik
+      });
+  });
+</script>
+<script src="{{ url_for('static', filename='modules/animation-infinity/index.js') }}" defer></script>
+<script>
+  const elements = document.querySelectorAll('.ellipsis');
+  elements.forEach(element => {
+      const maxLength = 30;
+      const text = element.textContent;
+
+      if (text.length > maxLength) {
+          element.textContent = text.substr(0, maxLength) + '...';
+      }
+  });
+</script>
+<!-- Skrip JavaScript untuk menambahkan elemen secara dinamis -->
+<script async>
+  var tagsList1 = [
+      "Artificial Intelligence", "Bootstrap", "CSS", "ExpressJS", "FastAPI",
+      "Firebase", "Flask", "GitHub", "HTML", "JavaScript", "Jupyter Notebook",
+      "MySQL", "NextJS", "NodeJS", "PWA", "Python", "ReactJS", "SASS", "SQLite", "TailwindCSS"
+  ];
+
+  var tagsList2 = [
+      "Artificial Intelligence", "Bootstrap", "CSS", "ExpressJS", "FastAPI",
+      "Firebase", "Flask", "GitHub", "HTML", "JavaScript", "Jupyter Notebook",
+      "MySQL", "NextJS", "NodeJS", "PWA", "Python", "ReactJS", "SASS", "SQLite", "TailwindCSS"
+  ];
+
+  function loadTags(containerId, tags) {
+      var container = document.getElementById(containerId);
+      tags.forEach(function(tag) {
+          var listItem = document.createElement('li');
+          listItem.className = 'px-2';
+          listItem.innerHTML = `
+              <div class="flex w-full text-normal space-x-2 rounded-full px-4 py-2 dark:shadow-neutral-700 shadow-[0_3px_10px_rgb(0,0,0,0.2)]">
+                  <div class="h-6 w-6">
+                      <img src="../../static/images/skills/${tag}.svg" width="100%" height="100%" alt="${tag}-${containerId}">
+                  </div>
+                  <div class="whitespace-nowrap">${tag}</div>
+              </div>`;
+          container.appendChild(listItem);
+      });
+  }
+
+  loadTags('lazy-load-list', tagsList1);
+  loadTags('lazy-load-list-reverse', tagsList2);
+</script>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends '_layout/base.html' %}
+
+{% block title %}Projects - Unforaimcode{% endblock %}
+
+{% block content %}
+<div class="flex justify-center">
+  <main class="content flex justify-center no-scrollbar w-full scroll-smooth transition-all duration-300 lg:min-h-screen">
+    <div class="container p-4 md:p-8 font-sora">
+      <div class="mb-10 mt-2" data-aos="fade-up" data-aos-duration="800">
+        <h1 class="font-sora text-2xl font-medium text-neutral-800 dark:text-neutral-300">Projects</h1>
+        <p class="mb-6 border-b border-dashed border-neutral-600 pb-6 pt-2 text-neutral-600 dark:text-neutral-400">Showcasing my passion for technology, design, and problem-solving through code.</p>
+        <section class="grid gap-5 pt-2 sm:grid-cols-2">
+          {% for project in projects %}
+          <div class="focus-in-expand-fwd" style="opacity: 1; transform: none;">
+            <a href="/projects/{{ project['routes'] }}">
+              <div data-testid="card" class="bg-cover group rounded-xl h-full shadow-sm transition-all duration-300 lg:hover:shadow-md relative cursor-pointer border border-neutral-200 dark:border-neutral-800 dark:bg-neutral-800 lg:hover:scale-[102%] ">
+                <div class="relative">
+                  <div class="overflow-hidden">
+                    <img data-testid="image" alt="{{ project['title'] }}" loading="lazy" width="100%" height="100%" decoding="async" data-nimg="1" class="duration-700 ease-in-out scale-100 blur-0 grayscale-0 rounded-t-xl object-cover" style="color: transparent;" srcset="{{ project['image'] }}" />
+                  </div>
+                  <div class="flex gap-1 absolute top-0 left-0 w-full h-full bg-black opacity-0 transition-opacity duration-300 justify-center items-center text-white group-hover:opacity-80 rounded-t-xl text-sm font-medium">
+                    <span>View Project</span>
+                    <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true" height="20" width="20" xmlns="http://www.w3.org/2000/svg">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                    </svg>
+                  </div>
+                </div>
+                <div class="p-5 space-y-2">
+                  <div class="flex justify-between">
+                    <div class="text-lg font-sora cursor-pointer text-neutral-700 dark:text-neutral-300 lg:group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-all duration-300">{{ project['title'] }}</div>
+                  </div>
+                  <p class="text-neutral-700 dark:text-neutral-400 text-[15px] leading-relaxed">{{ project['description'] }}</p>
+                  <div class="flex flex-wrap items-center gap-3 pt-2">
+                    {{ project['techStack'] | safe }}
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+          {% endfor %}
+        </section>
+      </div>
+    </div>
+  </main>
+</div>
+{% endblock %}

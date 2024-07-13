@@ -1,0 +1,112 @@
+.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+  background: rgb(43, 43, 43);
+}
+.hljs-keyword,
+.hljs-link,
+.hljs-literal,
+.hljs-section,
+.hljs-selector-tag {
+  color: #8be9fd;
+}
+.hljs-function .hljs-keyword {
+  color: #ff79c6;
+}
+.hljs,
+.hljs-subst {
+  color: #f8f8f2;
+}
+.hljs-addition,
+.hljs-attribute,
+.hljs-bullet,
+.hljs-name,
+.hljs-string,
+.hljs-symbol,
+.hljs-template-tag,
+.hljs-template-variable,
+.hljs-title,
+.hljs-type,
+.hljs-variable {
+  color: #f1fa8c;
+}
+.hljs-comment,
+.hljs-deletion,
+.hljs-meta,
+.hljs-quote {
+  color: #6272a4;
+}
+.hljs-doctag,
+.hljs-keyword,
+.hljs-literal,
+.hljs-name,
+.hljs-section,
+.hljs-selector-tag,
+.hljs-strong,
+.hljs-title,
+.hljs-type {
+  font-weight: 700;
+}
+.hljs-emphasis {
+  font-style: italic;
+}
+
+/* 
+Bahasa Pemrograman Umum
+
+    HTML/XML: language-html, language-xml
+    CSS: language-css
+    JavaScript: language-javascript, language-js
+    Python: language-python
+    Java: language-java
+    C++: language-cpp
+    C#: language-csharp
+    PHP: language-php
+    Ruby: language-ruby
+    Go: language-go
+    Swift: language-swift
+    TypeScript: language-typescript, language-ts
+    SQL: language-sql
+    JSON: language-json
+    Markdown: language-markdown
+    Shell: language-shell, language-bash, language-sh
+
+Bahasa Web dan Markup
+
+    HTML: language-html
+    XML: language-xml
+    SVG: language-svg
+    MathML: language-mathml
+
+Bahasa Backend dan Scripting
+
+    Perl: language-perl
+    Python: language-python
+    Ruby: language-ruby
+    PHP: language-php
+    Lua: language-lua
+    Rust: language-rust
+
+Bahasa Konfigurasi dan DevOps
+
+    YAML: language-yaml
+    TOML: language-toml
+    Dockerfile: language-dockerfile
+
+Bahasa Data dan Statistik
+
+    R: language-r
+    SQL: language-sql
+    GraphQL: language-graphql
+
+Bahasa Sistem dan Embedded
+
+    C: language-c
+    C++: language-cpp
+    Assembly: language-assembly
+
+Lainnya
+
+    Plaintext: language-plaintext
+    Ini: language-ini */

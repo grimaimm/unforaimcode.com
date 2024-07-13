@@ -1,0 +1,156 @@
+{% extends '_layout/base_no_sidebar.html' %}
+
+{% block title %}Python Flask Framework : Your First Flask Application - Unforaimcode{% endblock %}
+
+{% block content %}
+<link href="{{url_for('static',filename='modules/highlight/atom-dark.css')}}" rel="stylesheet">
+<div class="flex justify-center">
+  <main class="content flex justify-center no-scrollbar w-full scroll-smooth transition-all duration-300 lg:min-h-screen">
+    <div class="container-learn p-4 md:p-8 font-sora">
+      <div class="mb-10 mt-2" data-aos="fade-up" data-aos-duration="800">
+        <div class="w-fit">
+          <a data-testid="back-button-url" href="/learn/python-flask-framework">
+            <div class="flex gap-2 w-max hover:gap-3 items-center pb-5 transition-all duration-300 font-medium text-neutral-600 dark:text-neutral-400 cursor-pointer">
+              <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" data-testid="back-icon" height="20" width="20" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 8 8 12 12 16"></polyline>
+                <line x1="16" y1="12" x2="8" y2="12"></line>
+              </svg>
+              <span>Back</span>
+            </div>
+          </a>
+        </div>
+        <h1 class="font-sora text-2xl font-semibold text-neutral-800 dark:text-neutral-300">{{ lesson_data.title }}</h1>
+        <div class="mb-6 flex flex-col items-start justify-between gap-2 border-b border-dashed border-neutral-600 pb-6 pt-3 text-[14px] text-neutral-600 dark:text-neutral-400 sm:flex-row lg:items-center">
+          <div># Flask Fundamental</div>
+          <div class="mt-1 flex items-center gap-4">
+            <div class="relative inline-block">
+              <div class="tooltip-container relative">
+                <div class="rounded-full bg-neutral-200 px-2 py-1 text-xs font-medium text-neutral-500 dark:bg-neutral-700 dark:text-neutral-400">Easy</div>
+              </div>
+            </div>
+            <div class="relative inline-block">
+              <div class="tooltip-container relative">
+                <svg height="20" width="20" viewBox="0 0 256 255" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMinYMin meet">
+                  <defs>
+                    <linearGradient x1="12.959%" y1="12.039%" x2="79.639%" y2="78.201%" id="a">
+                      <stop stop-color="#387EB8" offset="0%" />
+                      <stop stop-color="#366994" offset="100%" />
+                    </linearGradient>
+                    <linearGradient x1="19.128%" y1="20.579%" x2="90.742%" y2="88.429%" id="b">
+                      <stop stop-color="#FFE052" offset="0%" />
+                      <stop stop-color="#FFC331" offset="100%" />
+                    </linearGradient>
+                  </defs>
+                  <path d="M126.916.072c-64.832 0-60.784 28.115-60.784 28.115l.072 29.128h61.868v8.745H41.631S.145 61.355.145 126.77c0 65.417 36.21 63.097 36.21 63.097h21.61v-30.356s-1.165-36.21 35.632-36.21h61.362s34.475.557 34.475-33.319V33.97S194.67.072 126.916.072zM92.802 19.66a11.12 11.12 0 0 1 11.13 11.13 11.12 11.12 0 0 1-11.13 11.13 11.12 11.12 0 0 1-11.13-11.13 11.12 11.12 0 0 1 11.13-11.13z" fill="url(#a)" />
+                  <path d="M128.757 254.126c64.832 0 60.784-28.115 60.784-28.115l-.072-29.127H127.6v-8.745h86.441s41.486 4.705 41.486-60.712c0-65.416-36.21-63.096-36.21-63.096h-21.61v30.355s1.165 36.21-35.632 36.21h-61.362s-34.475-.557-34.475 33.32v56.013s-5.235 33.897 62.518 33.897zm34.114-19.586a11.12 11.12 0 0 1-11.13-11.13 11.12 11.12 0 0 1 11.13-11.131 11.12 11.12 0 0 1 11.13 11.13 11.12 11.12 0 0 1-11.13 11.13z" fill="url(#b)" />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mt-5 space-y-5 leading-[1.8] dark:text-neutral-300">
+          <!-- Start Content Lessons 2 : Your First Flask Application -->
+            {% if lesson_data.content %}
+              {% for content in lesson_data.content %}
+                <h3 class="text-[18px] font-semibold leading-snug dark:text-neutral-300" level="3" node="[object Object]">{{ content.listHeading }}</h3>
+
+                <!-- Paragraf 1 dan 3 -->
+                {% if loop.index in [1, 3] %}
+                  {% if content.listDesc %}
+                    <ol class="font-sora list-decimal dark:text-neutral-300 space-y-3 pb-2 lg:pl-10 pl-5" depth="0" node="[object Object]">
+                      {% for listDesc in content.listDesc %}
+                        <li class="leading-snug">{{ listDesc.descKey | safe }}</li>
+                        {% if listDesc.descValue %}
+                          <div class="relative mx-auto pb-4">
+                            <div class="bg-code p-2 rounded-md pl-4">
+                              <div class="flex justify-between">
+                                <div class="overflow-x-auto flex items-center">
+                                  <pre id="lessons2-{{ listDesc.preCodeID }}"><code class="fade-in-v2">{{ listDesc.html_content|markdown|safe }}</code></pre>
+                                </div>
+                                <div class="left">
+                                  <button class="code rounded-lg border border-neutral-700 p-2 hover:bg-neutral-800" type="button" aria-label="Copy to Clipboard" data-umami-event="Click Copy Code" data-clipboard-target="#lessons2-{{ listDesc.preCodeID }}">
+                                    <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true" class="text-neutral-400" height="18" width="18" xmlns="http://www.w3.org/2000/svg">
+                                      <path stroke-linecap="round" stroke-linejoin="round" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path>
+                                    </svg>
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        {% endif %}
+                      {% endfor %}
+                    </ol>
+                  {% endif %}
+                {% endif %}
+
+                <!-- Paragraf 2 -->
+                {% if loop.index == 2 %}
+                  {% if content.listDesc %}
+                    {% for listDesc in content.listDesc %}
+                      <div node="[object Object]">{{ listDesc.descKey | safe }}</div>
+                      {% if listDesc.descValue %}
+                        <div class="relative mx-auto pb-4">
+                          <div class="bg-code p-2 rounded-md pl-4">
+                            <div class="flex justify-between">
+                              <div class="overflow-x-auto flex items-center">
+                                <pre id="lessons2-{{ listDesc.preCodeID }}"><code class="fade-in-v2">{{ listDesc.html_content|markdown|safe }}</code></pre>
+                              </div>
+                              <div class="left">
+                                <button class="code rounded-lg border border-neutral-700 p-2 hover:bg-neutral-800" type="button" aria-label="Copy to Clipboard" data-umami-event="Click Copy Code" data-clipboard-target="#lessons2-{{ listDesc.preCodeID }}">
+                                  <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true" class="text-neutral-400" height="18" width="18" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path>
+                                  </svg>
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      {% endif %}
+                      {% if listDesc.descList %}
+                        <ul class="list-disc space-y-3 pb-2 lg:pl-10 pl-5" depth="0" node="[object Object]">
+                          {% for descList in listDesc.descList %}
+                            <li>
+                              <div node="[object Object]">
+                                <code class="rounded-md bg-neutral-200 px-2 py-1 text-[14px] font-light text-sky-600 dark:bg-neutral-700 dark:text-sky-300">{{ descList.descListKey }}</code>: {{ descList.descListValue | safe }}
+                              </div>
+                            </li>
+                          {% endfor %}
+                        </ul>
+                      {% endif %}
+                    {% endfor %}
+                  {% endif %}
+                {% endif %}
+
+              {% endfor %}
+            {% endif %}
+          <!-- End Content Lessons 2 : Your First Flask Application -->
+        </div>
+        <div class="mt-8 flex justify-between border-t border-gray-300 py-5 dark:border-neutral-700">
+          <a href="/learn/python-flask-framework/{{ lesson_data.previousRoute.route }}/" class="flex items-center gap-2 rounded-lg bg-neutral-500 px-4 py-2 text-[14px] text-neutral-50 transition-all duration-300 hover:bg-neutral-600 dark:bg-neutral-600 dark:hover:bg-neutral-700">
+            <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+              <line x1="19" y1="12" x2="5" y2="12"></line>
+              <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>
+            <div class="flex items-center gap-1">Previous <span class="hidden lg:flex"> : {{ lesson_data.previousRoute.title }}</span>
+            </div>
+          </a>
+          <div class="flex-grow"></div>
+          <a href="/learn/python-flask-framework/{{ lesson_data.nextRoute.route }}/" class="flex items-center gap-2 rounded-lg bg-neutral-500 px-4 py-2 text-[14px] text-neutral-50 transition-all duration-300 hover:bg-neutral-600 dark:bg-neutral-600 dark:hover:bg-neutral-700">
+            <div class="flex items-center gap-1">Next <span class="hidden lg:flex"> : {{ lesson_data.nextRoute.title }}</span>
+            </div>
+            <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+<script src="{{ url_for('static', filename='modules/highlight/highlight-11.5.0.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/clipboard.min.js') }}"></script>
+<script>hljs.highlightAll();</script>
+<script>new ClipboardJS('.code');</script>
+{% endblock %}

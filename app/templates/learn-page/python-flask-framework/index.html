@@ -1,0 +1,68 @@
+<!-- app/templates/index.html -->
+{% extends '_layout/base_no_sidebar.html' %}
+
+{% block title %}Learn Python Flask Framework - Unforaimcode{% endblock %}
+
+{% block content %}
+<div class="flex justify-center">
+  <main class="content flex justify-center no-scrollbar w-full scroll-smooth transition-all duration-300 lg:min-h-screen">
+    <div class="container-learn p-4 md:p-8 font-sora">
+      <div class="mb-10 mt-2" data-aos="fade-up" data-aos-duration="800">
+        <div class="w-fit">
+          <a data-testid="back-button-url" href="/learn">
+            <div class="flex gap-2 w-max hover:gap-3 items-center pb-5 transition-all duration-300 font-medium text-neutral-600 dark:text-neutral-400 cursor-pointer">
+              <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" data-testid="back-icon" height="20" width="20" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 8 8 12 12 16"></polyline>
+                <line x1="16" y1="12" x2="8" y2="12"></line>
+              </svg>
+              <span>Back</span>
+            </div>
+          </a>
+        </div>
+        <h1 class="font-sora text-2xl font-medium text-neutral-800 dark:text-neutral-300">{{ learn_data['title'] }}</h1>
+        <p class="mb-6 border-b border-dashed border-neutral-600 pb-6 pt-2 text-neutral-600 dark:text-neutral-400">{{ learn_data['description'] }}</p>
+        <div class="flex flex-col gap-3">
+          {% for lesson in lessons %}
+          <div style="opacity: 1; transform: none;">
+            <a href="/learn/python-flask-framework/{{ lesson.routes }}">
+              <div data-testid="card" class="text-neutral-800 dark:text-neutral-300 rounded-xl shadow-sm transition-all duration-300 lg:hover:shadow-md flex w-full cursor-pointer flex-row items-center justify-between border border-neutral-300 px-5 py-4 dark:border-neutral-800 dark:bg-neutral-800 lg:hover:scale-[102%] ">
+                <div class="flex items-center gap-3">
+                  <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" class="hidden md:flex" height="18" width="18" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M19.903 8.586a.997.997 0 0 0-.196-.293l-6-6a.997.997 0 0 0-.293-.196c-.03-.014-.062-.022-.094-.033a.991.991 0 0 0-.259-.051C13.04 2.011 13.021 2 13 2H6c-1.103 0-2 .897-2 2v16c0 1.103.897 2 2 2h12c1.103 0 2-.897 2-2V9c0-.021-.011-.04-.013-.062a.952.952 0 0 0-.051-.259c-.01-.032-.019-.063-.033-.093zM16.586 8H14V5.414L16.586 8zM6 20V4h6v5a1 1 0 0 0 1 1h5l.002 10H6z"></path>
+                    <path d="M8 12h8v2H8zm0 4h8v2H8zm0-8h2v2H8z"></path>
+                  </svg>
+                  <h2>{{ lesson.title }}</h2>
+                </div>
+                <div class="hidden items-center gap-5 md:flex">
+                  <div data-testid="tooltip-container" class="relative inline-block">
+                    <div data-testid="children-container" class="tooltip-container relative">
+                      <div class="w-6">
+                        <svg width="100%" height="100%" viewBox="0 0 256 255" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMinYMin meet">
+                          <defs>
+                            <linearGradient x1="12.959%" y1="12.039%" x2="79.639%" y2="78.201%" id="a">
+                              <stop stop-color="#387EB8" offset="0%" />
+                              <stop stop-color="#366994" offset="100%" />
+                            </linearGradient>
+                            <linearGradient x1="19.128%" y1="20.579%" x2="90.742%" y2="88.429%" id="b">
+                              <stop stop-color="#FFE052" offset="0%" />
+                              <stop stop-color="#FFC331" offset="100%" />
+                            </linearGradient>
+                          </defs>
+                          <path d="M126.916.072c-64.832 0-60.784 28.115-60.784 28.115l.072 29.128h61.868v8.745H41.631S.145 61.355.145 126.77c0 65.417 36.21 63.097 36.21 63.097h21.61v-30.356s-1.165-36.21 35.632-36.21h61.362s34.475.557 34.475-33.319V33.97S194.67.072 126.916.072zM92.802 19.66a11.12 11.12 0 0 1 11.13 11.13 11.12 11.12 0 0 1-11.13 11.13 11.12 11.12 0 0 1-11.13-11.13 11.12 11.12 0 0 1 11.13-11.13z" fill="url(#a)" />
+                          <path d="M128.757 254.126c64.832 0 60.784-28.115 60.784-28.115l-.072-29.127H127.6v-8.745h86.441s41.486 4.705 41.486-60.712c0-65.416-36.21-63.096-36.21-63.096h-21.61v30.355s1.165 36.21-35.632 36.21h-61.362s-34.475-.557-34.475 33.32v56.013s-5.235 33.897 62.518 33.897zm34.114-19.586a11.12 11.12 0 0 1-11.13-11.13 11.12 11.12 0 0 1 11.13-11.131 11.12 11.12 0 0 1 11.13 11.13 11.12 11.12 0 0 1-11.13 11.13z" fill="url(#b)" />
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+{% endblock %}

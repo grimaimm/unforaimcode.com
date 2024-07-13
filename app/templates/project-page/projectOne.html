@@ -1,0 +1,172 @@
+{% extends '_layout/base_no_sidebar.html' %}
+
+{% block title %} Grimaim Financial Dashboard | Unforaimcode {% endblock %}
+
+{% block content %}
+<link href="{{url_for('static',filename='modules/highlight/atom-dark.css')}}" rel="stylesheet">
+<div class="flex justify-center">
+  <main class="content flex justify-center no-scrollbar w-full scroll-smooth transition-all duration-300 lg:min-h-screen">
+    <div class="container-blog p-4 md:p-8 font-sora">
+      <div class="mb-10 mt-2" data-aos="fade-up" data-aos-duration="800">
+        <div class="w-fit">
+          <a data-testid="back-button-url" href="/projects">
+            <div class="flex gap-2 w-max hover:gap-3 items-center pb-5 transition-all duration-300 font-medium text-neutral-600 dark:text-neutral-400 cursor-pointer">
+              <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" data-testid="back-icon" height="20" width="20" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 8 8 12 12 16"></polyline>
+                <line x1="16" y1="12" x2="8" y2="12"></line>
+              </svg>
+              <span>Back</span>
+            </div>
+          </a>
+        </div>
+        <h1 class="text-2xl font-medium font-sora text-neutral-800 dark:text-neutral-300">{{ project_data['title'] }}</h1>
+        <p class="mb-6 border-b border-dashed border-neutral-600 pt-2 pb-6 text-neutral-600 dark:text-neutral-400">{{ project_data['description'] }}</p>
+        <div class="space-y-8">
+          <div class="flex flex-col lg:flex-row items-start lg:items-center sm:flex-row gap-5 justify-between">
+            <div class="flex items-center flex-wrap gap-2">
+              <span class="text-[15px] mb-1 text-neutral-700 dark:text-neutral-300">Tech Stack :</span>
+              <div class="flex flex-wrap items-center gap-3">
+                {{ project_data['techStack'] | safe }}
+              </div>
+            </div>
+            <div class="flex gap-4">
+              <a target="_blank" data-umami-event="Click Source Code - Project Grimaim Financial Dashboard" href="{{ project_data['sourceCode'] }}">
+                <div class="flex gap-2 items-center font-medium text-neutral-700 dark:text-neutral-300 ">
+                  <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16" height="22" width="22" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+                  </svg>
+                  <span class="text-[15px] dark:text-teal-500 hover:dark:text-teal-400 transition-all duration-300">Source Code</span>
+                </div>
+              </a>
+              <span class="text-neutral-400 dark:text-neutral-600">|</span>
+              <a target="_blank" data-umami-event="Click Live Demo - Project Grimaim Financial Dashboard" href="{{ project_data['liveDemo'] }}">
+                <div class="flex gap-2 items-center font-medium text-neutral-700 dark:text-neutral-300 ">
+                  <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="22" width="22" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                    <polyline points="15 3 21 3 21 9"></polyline>
+                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                  </svg>
+                  <span class="text-[15px] dark:text-teal-500 hover:dark:text-teal-400 transition-all duration-300">Live Demo</span>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="overflow-hidden">
+            <img 
+              alt="aulianza.id" 
+              loading="lazy" 
+              width="800" 
+              height="400" 
+              decoding="async" 
+              data-nimg="1" 
+              class="duration-700 ease-in-out scale-100 blur-0 grayscale-0 w-full" 
+              style="color: transparent;"
+              srcset="{{ project_data['image'] }}" />
+          </div>
+          <div class="mt-5 space-y-8 lg:space-y-14 leading-[1.8] dark:text-neutral-300">
+            {% for project in project_contents_data %}
+              <div class="space-y-4">
+                {% if project.title %}
+                  <h2 class="text-xl font-medium dark:text-neutral-300" level="2" node="[object Object]">{{ project.title }}</h2>
+                {% endif %}
+                {% if project.paragraf %}
+                  {% if project.paragraf is iterable and not project.paragraf is string %}
+                    {% for paragraf in project.paragraf %}
+                      <div node="[object Object]">{{ paragraf }}</div>
+                    {% endfor %}
+                  {% else %}
+                    <div node="[object Object]">{{ project.paragraf }}</div>
+                  {% endif %}
+                {% endif %}
+
+                {% if project.listFeature %}
+                  {% for listFeature in project.listFeature %}
+                    <h3 class="text-[18px] font-medium leading-snug dark:text-neutral-300" level="3" node="[object Object]">{{ loop.index }}. {{ listFeature.listTitle }}</h3>
+                    {% if listFeature.listContent %}
+                    <ol class="font-sora list-disc dark:text-neutral-300 space-y-3 pb-2 pl-10" depth="0" node="[object Object]">
+                      {% for listContent in listFeature.listContent %}
+                        <li class="leading-snug">{{ listContent }} </li>
+                      {% endfor %}
+                    </ol>
+                    {% endif %}
+                  {% endfor %}
+                {% endif %}
+
+                {% if project.listStep %}
+                  {% for listStep in project.listStep %}
+                    <h3 class="text-[18px] font-medium leading-snug dark:text-neutral-300" level="3" node="[object Object]">{{ loop.index }}. {{ listStep.listTitle }}</h3>
+                    {% if listStep.listDesc %}
+                      <div node="[object Object]"> {{ listStep.listDesc | safe }} </div>
+                    {% endif %}
+                    {% if loop.index in [3] and project.listStep %}
+                      {% if listStep.stepByStep %}
+                        <ol class="font-sora list-disc dark:text-neutral-300 space-y-3 pb-2 pl-10" depth="0" node="[object Object]">
+                          {% for stepByStep in listStep.stepByStep %}
+                            <li class="leading-snug">{{ stepByStep.listDesc }}</li>
+                            {% if stepByStep.code %}
+                              <div class="relative mx-auto pb-4">
+                                <div class="bg-code p-2 rounded-md pl-4">
+                                  <div class="flex justify-between">
+                                    <div class="overflow-x-auto flex items-center">
+                                      <pre id="stepByStep-{{ loop.index }}"><code class="fade-in-v2">{{ stepByStep.html_content|markdown|safe }}</code></pre>
+                                    </div>
+                                    <div class="left">
+                                      <button class="code rounded-lg border border-neutral-700 p-2 hover:bg-neutral-800" type="button" aria-label="Copy to Clipboard" data-umami-event="Click Copy Code" data-clipboard-target="#stepByStep-{{ loop.index }}">
+                                        <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true" class="text-neutral-400" height="18" width="18" xmlns="http://www.w3.org/2000/svg">
+                                          <path stroke-linecap="round" stroke-linejoin="round" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path>
+                                        </svg>
+                                      </button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            {% endif %}
+                          {% endfor %}
+                        </ol>
+                      {% endif %}
+                    {% endif %}
+
+                    {% if loop.index in [1,2,4,5] and project.listStep %}
+                      {% if listStep.listCode %}
+                      {% if loop.index == 5 %}
+                        <div class="relative mx-auto">
+                      {% else %}
+                        <div class="relative mx-auto pb-4">
+                      {% endif %}
+                          <div class="bg-code p-2 rounded-md pl-4">
+                            <div class="flex justify-between">
+                              <div class="overflow-x-auto flex items-center">
+                                <pre id="listStep-{{ loop.index }}"><code class="fade-in-v2">{{ listStep.html_content|markdown|safe }}</code></pre>
+                              </div>
+                              <div class="left">
+                                <button class="code rounded-lg border border-neutral-700 p-2 hover:bg-neutral-800" type="button" aria-label="Copy to Clipboard" data-umami-event="Click Copy Code" data-clipboard-target="#listStep-{{ loop.index }}">
+                                  <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true" class="text-neutral-400" height="18" width="18" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path>
+                                  </svg>
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      {% endif %}
+                    {% endif %}
+                    {% if listStep.listDesc1 %}
+                      <div node="[object Object]"> {{ listStep.listDesc1 | safe }} </div>
+                    {% endif %}
+                  {% endfor %}
+                {% endif %}
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+<script src="{{ url_for('static', filename='modules/highlight/highlight-11.5.0.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/clipboard.min.js') }}"></script>
+<script>hljs.highlightAll();</script>
+<script>new ClipboardJS('.code');</script>
+{% endblock %}
+

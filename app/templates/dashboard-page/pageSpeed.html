@@ -1,0 +1,104 @@
+<div class="flex items-center gap-1 text-xl font-medium text-neutral-800 dark:text-neutral-300 ">
+  <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" class="mr-1" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+    <path fill="none" d="M0 0h24v24H0z"></path>
+    <path d="M20.38 8.57l-1.23 1.85a8 8 0 01-.22 7.58H5.07A8 8 0 0115.58 6.85l1.85-1.23A10 10 0 003.35 19a2 2 0 001.72 1h13.85a2 2 0 001.74-1 10 10 0 00-.27-10.44zm-9.79 6.84a2 2 0 002.83 0l5.66-8.49-8.49 5.66a2 2 0 000 2.83z"></path>
+  </svg>
+  <h2 class="capitalize">Pagespeed Insight</h2>
+</div>
+<div class="mt-2 flex flex-col justify-between gap-2 text-neutral-600 dark:text-neutral-400 md:flex-row lg:items-center">
+  <p class="dark:text-neutral-400">My pagespeed index by google APIs</p>
+  <a target="_blank" class="font-code text-sm text-neutral-600 hover:text-neutral-700 dark:text-neutral-400 hover:dark:text-neutral-400 hidden lg:block" href="https://pagespeed.web.dev/">PageSpeed</a>
+</div>
+<div class="mt-4 flex space-x-2 overflow-x-auto" id="myTab" data-tabs-toggle="#myTabContent" role="tablist">
+  {% for tab in dashboards %}
+    <button class="nav-button rounded-lg px-2 py-1 text-xs {% if active_tab == tab['id'] %}bg-neutral-700 text-white dark:bg-neutral-200 dark:text-black{% else %}text-black dark:text-neutral-100 bg-neutral-100 dark:bg-neutral-800{% endif %}" 
+        data-href="/?tab={{ tab['id'] }}" onclick="handleRouteChange('/?tab={{ tab['id'] }}')" 
+        id="{{ tab['id'] }}-tab" data-tabs-target="#{{ tab['id'] }}" type="button" role="tab" aria-controls="{{ tab['id'] }}" aria-selected="{% if active_tab == tab['id'] %}true{% else %}false{% endif %}">{{ tab['id'] | capitalize }}</button>
+  {% endfor %}
+</div>
+<div id="myTabContent">
+  <div id="loading-container" class="my-6 flex items-end justify-center gap-2 space-x-6 text-neutral-600 md:space-x-8 md:text-sm">
+    <article class="lh-vars lh-screenshot-overlay--enabled">
+      <div class="lh-scores-container">
+        <div class="lh-pyro">
+          <div class="lh-pyro-before"></div>
+          <div class="lh-pyro-after"></div>
+        </div>
+        <div class="lh-scores-header">
+          <div class="lh-gauge__wrapperr lh-gauge__wrapper--not-applicablee">
+            <div class="lh-gauge__svg-wrapperr">
+              <svg class="lh-gauge" viewBox="0 0 120 120">
+                <circle class="lh-gauge-base" r="56" cx="60" cy="60" stroke-width="8"></circle>
+                <circle class="lh-gauge-arc" r="56" cx="60" cy="60" stroke-width="8" style="transform: rotate(-87.9537deg); stroke-dasharray: 351.858px, 351.858px;"></circle>
+              </svg>
+            </div>
+            <div class="lh-gauge__percentage" style="font-size: 12px; font-weight: 900;">...</div>
+            <div class="lh-gauge__label text-neutral-700 dark:text-neutral-200 text-nowrap">Performance</div>
+          </div>
+          <div class="lh-gauge__wrapperr lh-gauge__wrapper--not-applicablee">
+            <div class="lh-gauge__svg-wrapperr">
+              <svg class="lh-gauge" viewBox="0 0 120 120">
+                <circle class="lh-gauge-base" r="56" cx="60" cy="60" stroke-width="8"></circle>
+                <circle class="lh-gauge-arc" r="56" cx="60" cy="60" stroke-width="8" style="transform: rotate(-87.9537deg); stroke-dasharray: 351.858px, 351.858px;"></circle>
+              </svg>
+            </div>
+            <div class="lh-gauge__percentage" style="font-size: 12px; font-weight: 900;">...</div>
+            <div class="lh-gauge__label text-neutral-700 dark:text-neutral-200 text-nowrap">Accessibility</div>
+          </div>
+          <div class="lh-gauge__wrapperr lh-gauge__wrapper--not-applicablee">
+            <div class="lh-gauge__svg-wrapperr">
+              <svg class="lh-gauge" viewBox="0 0 120 120">
+                <circle class="lh-gauge-base" r="56" cx="60" cy="60" stroke-width="8"></circle>
+                <circle class="lh-gauge-arc" r="56" cx="60" cy="60" stroke-width="8" style="transform: rotate(-87.9537deg); stroke-dasharray: 351.858px, 351.858px;"></circle>
+              </svg>
+            </div>
+            <div class="lh-gauge__percentage" style="font-size: 12px; font-weight: 900;">...</div>
+            <div class="lh-gauge__label text-neutral-700 dark:text-neutral-200 text-nowrap">Best Practices</div>
+          </div>
+          <div class="lh-gauge__wrapperr lh-gauge__wrapper--not-applicablee">
+            <div class="lh-gauge__svg-wrapperr">
+              <svg class="lh-gauge" viewBox="0 0 120 120">
+                <circle class="lh-gauge-base" r="56" cx="60" cy="60" stroke-width="8"></circle>
+                <circle class="lh-gauge-arc" r="56" cx="60" cy="60" stroke-width="8" style="transform: rotate(-87.9537deg); stroke-dasharray: 351.858px, 351.858px;"></circle>
+              </svg>
+            </div>
+            <div class="lh-gauge__percentage" style="font-size: 12px; font-weight: 900;">...</div>
+            <div class="lh-gauge__label text-neutral-700 dark:text-neutral-200 text-nowrap">SEO</div>
+          </div>
+        </div>
+      </div>
+    </article>
+  </div>
+  <div id="resPagespeed" style="display: none;">
+    {% for tab in dashboards %}
+      <div class="{% if active_tab == tab['id'] %}block{% else %}hidden{% endif %}" id="{{ tab['id'] }}" role="tabpanel" aria-labelledby="{{ tab['id'] }}-tab">
+        <div class="my-6 flex items-end justify-center space-x-6 text-neutral-600 md:space-x-10 md:text-sm">
+          <div class="flex w-max flex-col items-center justify-center space-y-2 text-center">
+            <article class="lh-vars lh-screenshot-overlay--enabled">
+              <div class="lh-scores-container">
+                <div class="lh-pyro">
+                  <div class="lh-pyro-before"></div>
+                  <div class="lh-pyro-after"></div>
+                </div>
+                <div class="lh-scores-header">
+                  {% for content in tab['contents'] %}
+                  <div class="lh-gauge__wrapper {% if content['score'] == 0 %} lh-gauge__wrapper--not-applicable {% elif content['score'] >= 90 %} lh-gauge__wrapper--pass {% elif content['score'] >= 51 %} lh-gauge__wrapper--average {% else %} lh-gauge__wrapper--fail {% endif %}">
+                      <div class="lh-gauge__svg-wrapper">
+                        <svg class="lh-gauge" viewBox="0 0 120 120">
+                          <circle class="lh-gauge-base" r="56" cx="60" cy="60" stroke-width="8"></circle>
+                          <circle class="lh-gauge-arc" r="56" cx="60" cy="60" stroke-width="8" style="transform: rotate(-87.9537deg); stroke-dasharray: {{ (content['score'] * 351.858) / 100 }}px, 351.858px;"></circle>
+                        </svg>
+                      </div>
+                      <div class="lh-gauge__percentage">{{ content['score'] }}</div>
+                      <div class="lh-gauge__label text-neutral-700 dark:text-neutral-200 text-nowrap">{{ content['label'] }}</div>
+                    </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>

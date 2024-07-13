@@ -1,0 +1,94 @@
+{% extends '_layout/base.html' %}
+
+{% block title %}Blog - Unforaimcode{% endblock %}
+
+{% block content %}
+<div class="flex justify-center">
+  <main class="content flex justify-center no-scrollbar w-full scroll-smooth transition-all duration-300 lg:min-h-screen">
+    <div class="container p-4 md:p-8 font-sora">
+      <div class="mb-10 mt-2" data-aos="fade-up" data-aos-duration="800">
+        <h1 class="font-sora text-2xl font-medium text-neutral-800 dark:text-neutral-300">Blog</h1>
+        <p class="mb-6 border-b border-dashed border-neutral-600 pb-6 pt-2 text-neutral-600 dark:text-neutral-400">Exploring the world of code, creativity, and constant learning.</p>
+        <div class="mx-auto max-w-4xl mb-24" x-data="{'layout': 'grid'}">
+          <div class="mb-5 flex items-center justify-between text-[15px]">
+            <div class="flex items-center gap-1 text-xl font-medium text-neutral-800 dark:text-neutral-300 ">
+              <h2 class="capitalize">Latest Articles</h2>
+            </div>
+            <div class="sm:flex cursor-pointer gap-2 px-1 hidden">
+              <button x-on:click="layout = 'list'" x-bind:class="{'bg-neutral-300 dark:bg-neutral-700': layout === 'list'}" class="flex items-center gap-1 rounded-lg border border-neutral-300 p-1 font-medium text-neutral-600 transition-all duration-300 hover:bg-neutral-300 dark:border-neutral-600 dark:text-neutral-300 hover:dark:bg-neutral-700 dark:hover:bg-neutral-700" data-umami-event="Change Blog View to list" aria-label="list-icon">
+                <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16" class="p-0.5" height="24" width="24" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm-3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"></path>
+                </svg>
+              </button>
+              <button x-on:click="layout = 'grid'" x-bind:class="{'bg-neutral-300 dark:bg-neutral-700': layout === 'grid'}" class="flex items-center gap-1 rounded-lg border border-neutral-300 p-1 font-medium text-neutral-600 transition-all duration-300 hover:bg-neutral-300 dark:border-neutral-600 dark:text-neutral-300 hover:dark:bg-neutral-700 dark:hover:bg-neutral-700" data-umami-event="Change Blog View to grid" aria-label="grid-icon">
+                <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16" class="p-0.5" height="24" width="24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5v-3zM2.5 2a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zM1 10.5A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3z"></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+          <div class="grid sm:grid-cols-2 gap-5 sm:gap-4" x-bind:class="{'flex flex-col': layout === 'list', 'grid sm:grid-cols-2': layout === 'grid'}">
+            <!-- Articles -->
+            {% for blog in blogs %}
+            <div class="focus-in-expand-fwd" style="opacity: 1; transform: none;">
+              <a href="/blog/{{ blog['routes'] }}">
+                <div data-testid="card" x-bind:class="{'group rounded-xl relative shadow-sm transition-all duration-300 hover:shadow-md lg:hover:shadow-md flex w-full cursor-pointer items-center gap-6 border border-neutral-300 dark:border-neutral-800 dark:bg-neutral-800 sm:flex-row lg:hover:scale-[102%] !flex-row sm:p-5 sm:px-6 ': layout === 'list', 'group rounded-xl shadow-sm transition-transform duration-300 hover:shadow-md lg:hover:shadow-md flex cursor-pointer items-center gap-6 border border-neutral-300 dark:border-neutral-800 dark:bg-neutral-800 sm:flex-row lg:hover:scale-[102%] w-full !flex-col sm:h-full': layout === 'grid'}">
+                  <div x-bind:class="{'w-fit': layout === 'list', 'w-full': layout === 'grid'}">
+                    <div class="relative">
+                      <div class="overflow-hidden">
+                        <img
+                          data-testid="image"
+                          alt="{{ blog['title'] }}"
+                          loading="lazy"
+                          width="400"
+                          height="100"
+                          decoding="async"
+                          data-nimg="1"
+                          x-bind:class="{
+                            'duration-700 ease-in-out scale-100 blur-0 grayscale-0 w-full object-cover sm:h-[8.5rem] sm:rounded-xl': layout === 'list',
+                            'duration-700 ease-in-out scale-100 blur-0 grayscale-0 w-full object-cover sm:h-[8.5rem] sm:rounded-xl !h-48 !rounded-b-none !rounded-t-xl': layout === 'grid'
+                          }"
+                          class="duration-700 ease-in-out scale-100 blur-0 grayscale-0 w-full object-cover sm:h-[8.5rem] sm:rounded-xl !h-48 !rounded-b-none !rounded-t-xl"
+                          style="color: transparent;"
+                          src="{{ blog['image'] }}"
+                        />
+                      </div>
+                      <div x-bind:class="{'rounded-xl': layout === 'list', 'rounded-t-xl': layout === 'grid'}" class="flex gap-1 absolute top-0 left-0 w-full h-full bg-black opacity-0 transition-opacity duration-300 justify-center items-center text-white group-hover:opacity-80 text-sm font-medium">
+                        <span>View Blog</span>
+                        <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true" height="20" width="20" xmlns="http://www.w3.org/2000/svg">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                  <article x-bind:class="{'flex flex-col self-center w-full sm:w-4/5 flex-grow space-y-3 px-5 sm:p-0 mb-5 sm:mb-0': layout === 'list', 'flex flex-col self-center w-full flex-grow space-y-3 px-5 sm:pb-5 mb-5 sm:mb-0 sm:w-full': layout === 'grid'}" class="">
+                    <h2 class="font-medium text-neutral-600 transition-all duration-300 dark:text-neutral-200 dark:group-hover:text-teal-400 md:text-[17px] lg:group-hover:text-teal-800">{{ blog['title'] }}</h2>
+                    <div class="flex gap-4 text-neutral-600 dark:text-neutral-400">
+                      <div class="flex items-center gap-1">
+                        <span class="text-xs">{{ blog['published'].strftime('%b %d, %Y') }}</span>
+                      </div>
+                      <div class="flex items-center gap-1">
+                        <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 576 512" height="14" width="14" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M288 144a110.94 110.94 0 0 0-31.24 5 55.4 55.4 0 0 1 7.24 27 56 56 0 0 1-56 56 55.4 55.4 0 0 1-27-7.24A111.71 111.71 0 1 0 288 144zm284.52 97.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 0 0 0 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 0 0 0-29.19zM288 400c-98.65 0-189.09-55-237.93-144C98.91 167 189.34 112 288 112s189.09 55 237.93 144C477.1 345 386.66 400 288 400z"></path>
+                        </svg>
+                        <span class="text-xs">
+                          <div class="flex gap-1">
+                            <span>{{ blog['views'] }}</span>
+                            <span>Views</span>
+                          </div>
+                        </span>
+                      </div>
+                    </div>
+                    <p class="hidden text-sm leading-relaxed text-neutral-600 dark:text-neutral-400 sm:block">{{ blog['description'] }}..</p>
+                  </article>
+                </div>
+              </a>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+{% endblock %}

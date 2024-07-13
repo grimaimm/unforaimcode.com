@@ -1,0 +1,143 @@
+{% extends '_layout/base_no_sidebar.html' %}
+
+{% block title %}Exploring the World of Programming{% endblock %}
+
+{% block content %}
+<link href="{{url_for('static',filename='modules/highlight/atom-dark.css')}}" rel="stylesheet">
+<div class="flex justify-center">
+  <main class="content flex justify-center no-scrollbar w-full scroll-smooth transition-all duration-300 lg:min-h-screen">
+    <div class="container-blog p-4 md:p-8 font-sora">
+      <div class="mb-10 mt-2" data-aos="fade-up" data-aos-duration="800">
+        <div class="w-fit">
+          <a data-testid="back-button-url" href="/blog">
+            <div class="flex gap-2 w-max hover:gap-3 items-center pb-5 transition-all duration-300 font-medium text-neutral-600 dark:text-neutral-400 cursor-pointer">
+              <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" data-testid="back-icon" height="20" width="20" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 8 8 12 12 16"></polyline>
+                <line x1="16" y1="12" x2="8" y2="12"></line>
+              </svg>
+              <span>Back</span>
+            </div>
+          </a>
+        </div>
+        <h1 class="text-2xl font-semibold font-sora text-neutral-800 dark:text-neutral-300" style="opacity: 1; transform: none;">{{ blog_data['title'] }}</h1>
+        <div class="flex flex-col sm:flex-row gap-2 justify-between mb-6 pt-5 pb-6 border-b border-dashed border-neutral-600 text-neutral-600 dark:text-neutral-400 text-[14px]">
+          <div>Published on <span class="px-1 font-medium">{{ blog_data['published'].strftime('%B %d, %Y') }}</span>
+          </div>
+          <div class="flex items-center gap-5">
+            <div class="flex gap-1 items-center font-medium">
+              <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 576 512" height="16" width="16" xmlns="http://www.w3.org/2000/svg">
+                <path d="M288 144a110.94 110.94 0 0 0-31.24 5 55.4 55.4 0 0 1 7.24 27 56 56 0 0 1-56 56 55.4 55.4 0 0 1-27-7.24A111.71 111.71 0 1 0 288 144zm284.52 97.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 0 0 0 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 0 0 0-29.19zM288 400c-98.65 0-189.09-55-237.93-144C98.91 167 189.34 112 288 112s189.09 55 237.93 144C477.1 345 386.66 400 288 400z"></path>
+              </svg>
+              <div class="flex gap-1 ml-0.5">
+                <span>{{ views }}</span>
+                <span>Views</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="space-y-6 leading-[1.8] dark:text-neutral-300">
+          <div class="overflow-hidden">
+            <img 
+              alt="{{ blog_data['title'] }}" 
+              fetchpriority="high" 
+              width="800" 
+              height="500" 
+              decoding="async" 
+              data-nimg="1" 
+              class="transition-all duration-700 hover:scale-105" 
+              style="color: transparent;"
+              src="{{ blog_data['image'] }}"
+            />
+          </div>
+          <div class="font-sora" node="[object Object]">
+            {{ blog_data['paragraf'] }}
+          </div>
+
+          {% for blog in blogs %}
+            <blockquote class="rounded-br-2xl border-l-[5px] border-neutral-700 border-l-cyan-500 bg-neutral-200 py-3 pl-3 lg:pl-6 font-sora text-lg font-medium text-cyan-800 dark:bg-neutral-800 dark:text-cyan-200" node="[object Object]">
+              <h2 class="text-xl font-medium dark:text-neutral-300" level="2" node="[object Object]">{{ blog.title }}</h2>
+            </blockquote>
+            
+            {% if blog.paragraf %}
+              <div class="font-sora" node="[object Object]">{{ blog.paragraf }}</div>
+            {% endif %}
+            {% if blog.paragraf1 %}
+              <div class="font-sora" node="[object Object]">{{ blog.paragraf1 }}</div>
+            {% endif %}
+            {% if blog.paragraf2 %}
+              <div class="font-sora" node="[object Object]">{{ blog.paragraf2 }}</div>
+            {% endif %}
+            {% if blog.paragraf3 %}
+              <div class="font-sora" node="[object Object]">{{ blog.paragraf3 }}</div>
+            {% endif %}
+
+            {% if blog.list %}
+              <ol class="font-sora {{ blog.typeList }} dark:text-neutral-300 space-y-3 pb-2 pl-5" depth="0" node="[object Object]">
+                {% for list in blog.list %}
+                  <li class="leading-snug text-[18px] font-medium">{{ list.title }}</li>
+                  <div class="font-sora" node="[object Object]">{{ list.paragraf }}</div>
+                  {% if list.titleCode %}
+                    <h3 class="font-sora text-[18px] font-medium leading-snug dark:text-neutral-300" level="3" node="[object Object]">{{ list.titleCode }}</h3>    
+                  {% endif %}
+                  {% if list.code %}
+                  <div class="relative mx-auto pb-4">
+                    <div class="bg-code p-3 pl-4 rounded-md">
+                      <div class="flex justify-between">
+                        <div class="overflow-x-auto flex items-center">
+                          <pre id="code-{{ loop.index }}"><code class="fade-in-v2">{{ list.html_content|markdown|safe }}</code></pre>
+                        </div>
+                        <div class="left">
+                          <button class="code rounded-lg border border-neutral-700 p-2 hover:bg-neutral-800" type="button" aria-label="Copy to Clipboard" data-umami-event="Click Copy Code" data-clipboard-target="#code-{{ loop.index }}">
+                            <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true" class="text-neutral-400" height="18" width="18" xmlns="http://www.w3.org/2000/svg">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  {% endif %}
+                {% endfor %}
+              </ol>
+            {% endif %}
+
+            {% if blog.list1 %}
+              <ol class="font-sora {{ blog.typeList }} dark:text-neutral-300 space-y-3 pb-2 pl-5" depth="0" node="[object Object]">
+                {% for list in blog.list1 %}
+                <li class="leading-snug">
+                  {{ list.description }}
+                </li>
+                {% endfor %}
+              </ol>
+            {% endif %}
+
+            {% if blog.paragrafLast1 %}
+              <div class="font-sora" node="[object Object]">{{ blog.paragrafLast1 }}</div>
+            {% endif %}
+          {% endfor %}
+
+          <div class="my-10 space-y-2">
+            <h6 class="text-lg font-medium">Tags:</h6>
+            <div class="flex flex-wrap gap-2 pt-2">
+              <div class="rounded-full bg-neutral-200 px-4 py-1 text-[14px] font-medium text-neutral-600 dark:bg-neutral-700 dark:text-neutral-200">
+                <span class="mr-1 font-semibold">#</span>Programming
+              </div>
+              <div class="rounded-full bg-neutral-200 px-4 py-1 text-[14px] font-medium text-neutral-600 dark:bg-neutral-700 dark:text-neutral-200">
+                <span class="mr-1 font-semibold">#</span>Programmer
+              </div>
+              <div class="rounded-full bg-neutral-200 px-4 py-1 text-[14px] font-medium text-neutral-600 dark:bg-neutral-700 dark:text-neutral-200">
+                <span class="mr-1 font-semibold">#</span>Coding
+              </div>
+            </div>
+          </div>
+          <div class="border-t border-gray-200 dark:border-neutral-800 !my-10" data-testid="breakline"></div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+<script src="{{ url_for('static', filename='modules/highlight/highlight-11.5.0.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/clipboard.min.js') }}"></script>
+<script>hljs.highlightAll();</script>
+<script>new ClipboardJS('.code');</script>
+{% endblock %}
