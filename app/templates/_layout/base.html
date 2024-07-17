@@ -3,17 +3,33 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Web developer experienced in frontend technologies, including HTML, CSS, and JavaScript, with proficiency in backend development using Flask and Python.">
-    <meta name="keywords" content="unforaimcode, unforaim, MuhammadRahim, aimcodes, aiiimmmm, programming tips, belajar javascript, belajar flask python">
+
+    <!-- Preload -->
+    <link rel="preload" href="{{ url_for('static', filename='fonts/Sora/static/Sora-Bold.ttf') }}" as="font" type="font/ttf" crossorigin="anonymous">
+    <link rel="preload" href="{{ url_for('static', filename='fonts/Sora/static/Sora-ExtraBold.ttf') }}" as="font" type="font/ttf" crossorigin="anonymous">
+    <link rel="preload" href="{{ url_for('static', filename='fonts/Sora/static/Sora-ExtraLight.ttf') }}" as="font" type="font/ttf" crossorigin="anonymous">
+    <link rel="preload" href="{{ url_for('static', filename='fonts/Sora/static/Sora-Light.ttf') }}" as="font" type="font/ttf" crossorigin="anonymous">
+    <link rel="preload" href="{{ url_for('static', filename='fonts/Sora/static/Sora-Medium.ttf') }}" as="font" type="font/ttf" crossorigin="anonymous">
+    <link rel="preload" href="{{ url_for('static', filename='fonts/Sora/static/Sora-Regular.ttf') }}" as="font" type="font/ttf" crossorigin="anonymous">
+    <link rel="preload" href="{{ url_for('static', filename='fonts/Sora/static/Sora-SemiBold.ttf') }}" as="font" type="font/ttf" crossorigin="anonymous">
+    <link rel="preload" href="{{ url_for('static', filename='fonts/Sora/static/Sora-Thin.ttf') }}" as="font" type="font/ttf" crossorigin="anonymous">
+    <link rel="preload" as="image" href="https://res.cloudinary.com/dinzynzet/image/upload/v1720045789/unforaimcode.com/flask/admin/ipu72asbwqhu4gd4zvzi.webp" type="image/webp">
+    <link rel="preload" href="https://www.googletagmanager.com/gtag/js?id=G-9NPTPW4813" as="script">
+    <link rel="preload" href="https://www.googletagmanager.com/gtag/js?id=GTM-N5TJPS2F" as="script">
+
+    <meta name="description" content="Personal website, portfolio, blog, web development resources, Flask tutorials of Undoraim Code.">
+    <meta name="keywords" content="unforaimcode, unforaim, aiiimmmm , aimcode, aimcodes, muhammad rahim, programming tips, belajar flask python">
     <link rel="author" href="https://unforaimcode.pythonanywhere.com/">
-    <link rel="canonical" href="https://unforaimcode.pythonanywhere.com">
+    {% block canonical %}
+    <link rel="canonical" href="https://unforaimcode.pythonanywhere.com/">
+    {% endblock %}
     <meta name="author" content="MuhammadRahim @aiiimmmm._">
     <meta name="creator" content="MuhammadRahim @aiiimmmm._">
     <meta name="robots" content="index, follow">
 
     <!-- Meta Tag Open Graph -->
     <meta property="og:title" content="Muhammad Rahim | Personal Website" />
-    <meta property="og:description" content="Web developer experienced in frontend technologies, including HTML, CSS, and JavaScript, with proficiency in backend development using Flask and Python." />
+    <meta property="og:description" content="Personal website, portfolio, blog, web development resources, Flask tutorials of Undoraim Code." />
     <meta property="og:url" content="https://unforaimcode.pythonanywhere.com" />
     <meta property="og:image" content="https://res.cloudinary.com/dinzynzet/image/upload/f_auto,q_auto:good/v1/unforaimcode.com/flask/project/rl2u5w60kknz68pqsd1z" />
     <meta property="og:type" content="website" />
@@ -22,10 +38,10 @@
     <!-- Meta Tag Twitter Cards -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Muhammad Rahim | Personal Website">
-    <meta name="twitter:description" content="Web developer experienced in frontend technologies, including HTML, CSS, and JavaScript, with proficiency in backend development using Flask and Python.">
+    <meta name="twitter:description" content="Personal website, portfolio, blog, web development resources, Flask tutorials of Undoraim Code..">
     <meta name="twitter:image" content="https://res.cloudinary.com/dinzynzet/image/upload/f_auto,q_auto:good/v1/unforaimcode.com/flask/project/rl2u5w60kknz68pqsd1z">
-    <meta name="twitter:site" content="@your_twitter_username">
-    <meta name="twitter:creator" content="@your_twitter_username">
+    <meta name="twitter:site" content="@aiiimmmm._">
+    <meta name="twitter:creator" content="@aiiimmmm._">
 
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-9NPTPW4813"></script>
