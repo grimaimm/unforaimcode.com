@@ -9,7 +9,8 @@ blueprints = {
     'flaskLessons': [f'flaskLessons_{i}' for i in range(5)],
     'about': ['about'],
     'contact': ['contact'],
-    'dashboard': ['dashboard', 'dashboardGithub']
+    'dashboard': ['dashboard', 'dashboardGithub'],
+    'index': ['sitemap', 'robots']
 }
 
 # Initialize Blueprints
@@ -19,6 +20,7 @@ for key, bp_names in blueprints.items():
 
 # Import Routes
 from .home import homeRoutes
+from .index import indexmap
 from .project import projectRoutes
 from .blog import blogRoutes
 from .learn import learnRoutes, flaskFrameworkLessons

@@ -4,19 +4,53 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Web developer experienced in frontend technologies, including HTML, CSS, and JavaScript, with proficiency in backend development using Flask and Python.">
-    <meta name="keywords" content="unforaimcode, unforaim, MuhammadRahim, aiiimmmm, programming tips, belajar javascript, belajar flask python">
+    <meta name="keywords" content="unforaimcode, unforaim, MuhammadRahim, aimcodes, aiiimmmm, programming tips, belajar javascript, belajar flask python">
     <link rel="author" href="https://unforaimcode.pythonanywhere.com/">
-    <link rel="canonical" href="https://unforaimcode.pythonanywhere.com/">
+    <link rel="canonical" href="https://unforaimcode.pythonanywhere.com">
     <meta name="author" content="MuhammadRahim @aiiimmmm._">
     <meta name="creator" content="MuhammadRahim @aiiimmmm._">
     <meta name="robots" content="index, follow">
-    <meta property="og:title" content="Muhammad Rahim | Personal Website">
-    <meta property="og:description" content="Web developer experienced in frontend technologies, including HTML, CSS, and JavaScript, with proficiency in backend development using Flask and Python.">
-    <meta property="og:image" content="https://res.cloudinary.com/dinzynzet/image/upload/f_auto,q_auto:good/v1/unforaimcode.com/flask/project/rl2u5w60kknz68pqsd1z">
-    <meta property="og:url" content="https://unforaimcode.pythonanywhere.com/">
-    <meta property="og:site_name" content="Unforaimcode">
-    <meta property="og:locale" content="id-ID">
-    <meta property="og:type" content="website">
+
+    <!-- Meta Tag Open Graph -->
+    <meta property="og:title" content="Muhammad Rahim | Personal Website" />
+    <meta property="og:description" content="Web developer experienced in frontend technologies, including HTML, CSS, and JavaScript, with proficiency in backend development using Flask and Python." />
+    <meta property="og:url" content="https://unforaimcode.pythonanywhere.com" />
+    <meta property="og:image" content="https://res.cloudinary.com/dinzynzet/image/upload/f_auto,q_auto:good/v1/unforaimcode.com/flask/project/rl2u5w60kknz68pqsd1z" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Unforaimcode" />
+
+    <!-- Meta Tag Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Muhammad Rahim | Personal Website">
+    <meta name="twitter:description" content="Web developer experienced in frontend technologies, including HTML, CSS, and JavaScript, with proficiency in backend development using Flask and Python.">
+    <meta name="twitter:image" content="https://res.cloudinary.com/dinzynzet/image/upload/f_auto,q_auto:good/v1/unforaimcode.com/flask/project/rl2u5w60kknz68pqsd1z">
+    <meta name="twitter:site" content="@your_twitter_username">
+    <meta name="twitter:creator" content="@your_twitter_username">
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9NPTPW4813"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-9NPTPW4813', {
+            'cookie_flags': 'SameSite=None;Secure'
+        });
+    </script>
+
+    <!-- Google Site Verification -->
+    <meta name="google-site-verification" content="WcE43l4K01u4hJe_m-EkPPMjZZi2TD-h5ksb2Gg2r34" />
+
+    <!-- Google Tag Manager -->
+    <script>
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-N5TJPS2F');
+    </script>
+    <!-- End Google Tag Manager -->
+    
     {% include '_includes/stylesheet.html' %}
     <title>{% block title %}Unforaimcode{% endblock %}</title>
     {% include '_includes/favicon.html' %}
@@ -30,6 +64,12 @@
     </script>
   </head>
   <body class="font-sora dark:bg-dark transition-all duration-300">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+      <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N5TJPS2F"
+      height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
     <div class="wrapper flex lg:flex-row flex-col items-stretch lg:dark:bg-dark-wrapper lg:bg-dark-wrapper">
       <div id="sidebar">
         {% include '_includes/nav.html' %}

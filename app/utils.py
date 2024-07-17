@@ -19,8 +19,11 @@ def register_blueprints(app):
     from .routes.about import about_bp
     from .routes.contact import contact_bp
     from .routes.dashboard import dashboard_bp
+    from .routes.index import sitemap_bp, robots_bp
 
     app.register_blueprint(home_bp, url_prefix='/')
+    app.register_blueprint(sitemap_bp, url_prefix='/sitemap.xml')
+    app.register_blueprint(robots_bp, url_prefix='/robots.txt')
     app.register_blueprint(project_bp, url_prefix='/projects')
     app.register_blueprint(projectOne_bp, url_prefix='/projects/grimaim-financial-dashboard')
     app.register_blueprint(projectTwo_bp, url_prefix='/projects/unforaim-code-com')
