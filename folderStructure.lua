@@ -71,7 +71,6 @@ project/
 └── wsgi.py
 
 
-https://chatgpt.com/share/015f54c6-001b-4807-8130-8dd7d296762e
 Install NODE.JS
 1. npm init -y
 2. npm Install
